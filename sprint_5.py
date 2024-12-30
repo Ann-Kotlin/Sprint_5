@@ -1,4 +1,5 @@
-# 130828463	
+# 130891619
+import string	
 def decode_string(instruction: str) -> str:
     stack = []
     current_string = ''
@@ -6,18 +7,15 @@ def decode_string(instruction: str) -> str:
     
     for element in instruction:
         # Если элемент это цифра
-        if element.isdigit():
-            # Для чисел из нескольких цифр
-            current_num = current_num * 10 + int(element)
+        if element in string.octdigits: 
+            current_num += str(element)
         elif element == '[':
-            stack.append(current_string)
-            stack.append(current_num)
+            stack.append((current_string, current_num))
             current_string = ''
-            current_num = 0
+            current_num = ''
         elif element == ']':
-            repeat_nums = stack.pop()
-            string_befor = stack.pop()
-            current_string = string_befor + current_string * repeat_nums
+            string_befor, repeat_nums = stack.pop()
+            current_string = string_befor + current_string * int(repeat_nums)
         else: 
             # Элемент буква или символ         
             current_string += element
