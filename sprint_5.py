@@ -1,5 +1,6 @@
-# 130891619
+# 130921053
 import string	
+
 def decode_string(instruction: str) -> str:
     stack = []
     current_string = ''
@@ -7,7 +8,7 @@ def decode_string(instruction: str) -> str:
     
     for element in instruction:
         # Если элемент это цифра
-        if element in string.octdigits: 
+        if element in string.digits: 
             current_num += str(element)
         elif element == '[':
             stack.append((current_string, current_num))
